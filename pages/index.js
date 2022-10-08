@@ -4,23 +4,25 @@ import styles from '../styles/Home.module.css'
 
 import {useRecoilState} from 'recoil'
 import { countState, userState } from '../components/atoms'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
-  const [count , setCount] = useRecoilState(countState);
+  const [globalCount , setGlobalCount] = useRecoilState(countState);
   const [user, setUser] = useRecoilState(userState);
-  const [cout1, setCount1] = useState(0)
-  let c;
+  const [count, setCount] = useState(0)
 
   const increment = () => {
-    return cout1 + 1;
+    return count + 1;
   }
 
   const onClickHandler = () => {
-    setCount1(increment);
-    setCount(cout1);
+    setCount(increment)
+    setGlobalCount(increment);
   }
 
+  useEffect(() => {
+    setCount(globalCount)
+  }, [])
 
   const updateUser = () => {
     return { ...user, ...{age: user.age + 1}};
