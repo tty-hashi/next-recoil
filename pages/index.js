@@ -9,16 +9,13 @@ import { useState } from 'react'
 export default function Home() {
   const [count , setCount] = useRecoilState(countState);
   const [user, setUser] = useRecoilState(userState);
-  const [cout1, setCount1] = useState(0)
-  let c;
 
   const increment = () => {
-    return cout1 + 1;
+    return count + 1;
   }
 
   const onClickHandler = () => {
-    setCount1(increment);
-    setCount(cout1);
+    setCount(increment);
   }
 
 
@@ -29,7 +26,7 @@ export default function Home() {
     <>
     <h1>Home</h1>
     <div>
-      <p>count:{count}</p>
+      <p suppressHydrationWarning={true}>count:{count}</p>
       <button onClick={onClickHandler}>count increment</button>
       <hr />
       <p>user.name:{user.name}</p>
